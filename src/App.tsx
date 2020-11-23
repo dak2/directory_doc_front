@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuBar from './components/organisms/MenuBar';
+import MenuBar from './pages/TopPage';
 
 function App() {
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -103,6 +104,19 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const getItems = async () => {
+    try {
+      //ここでGETメソッドを使用してgithubのプロフィールを取得します。
+      const result = await axios.get(
+        `${'http://localhost:3000/api/items'}`
+      );
+      console.log(result);
+    } catch (error) {
+      //ここでリクエストに失敗した時の処理、メッセージを記述します。
+      console.log('error!!');
+    }
+  };
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -159,7 +173,7 @@ export default function MiniDrawer() {
         <List>
           {['ShoppingCart', 'Profile', 'Shippping'].map((text, _index) => (
             <ListItem button key={text}>
-              <ListItemIcon>
+              <ListItemIcon onClick={() => getItems()}>
                 {sideBarIcons(text)}
               </ListItemIcon>
               <ListItemText primary={text} />
